@@ -20,9 +20,9 @@ class PillSchedulePage extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Column(
-                    children: [
+                    children: const [
                       CircleAvatar(
-                        child: Icon(Icons.check),
+                        child:  Icon(Icons.check),
                         backgroundColor: mainColor,
                         radius: 20,
                       ),
