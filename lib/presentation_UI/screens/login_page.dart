@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
 import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
 import 'package:solution_challenge/constants/colors/colors.dart';
 import 'package:solution_challenge/presentation_UI/widgets/buttonWidget.dart';
@@ -28,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Text(
-                'Название',
+                'Авторизуйтесь',
                 style: TextStyle(
                     color: mainColor,
                     fontSize: 40,
@@ -61,19 +63,56 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Center(
                 child: Column(
-                  children: const <Widget>[
-                    ButtonWidget(
-                      title: 'Войти',
-                      backgroundColor: mainColor,
-                      textColor: Colors.white,
+                  children: <Widget>[
+                    ElevatedButton(
+                      // title: 'Войти',
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(mainColor),
+                        textStyle: MaterialStatePropertyAll(
+                            TextStyle(color: Colors.white)),
+                        elevation: MaterialStatePropertyAll(1),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => InformationPage(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        child: const Text('Войти'),
+                      ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    ButtonWidget(
-                      title: 'Забыл пароль',
-                      backgroundColor: Colors.white,
-                      textColor: Colors.grey,
+                    ElevatedButton(
+                      // title: 'Войти',
+                      style: const ButtonStyle(
+                        // splashFactory: Splash,
+                        overlayColor: MaterialStatePropertyAll(Colors.grey),
+
+                        backgroundColor: MaterialStatePropertyAll(Colors.white),
+
+                        elevation: MaterialStatePropertyAll(0),
+                        side: MaterialStatePropertyAll(
+                          BorderSide(width: 1, color: Colors.grey),
+                        ),
+                      ),
+                      onPressed: () {
+                        print('asd');
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        child: const Text(
+                          'Забыли пароль',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
                     ),
                   ],
                 ),

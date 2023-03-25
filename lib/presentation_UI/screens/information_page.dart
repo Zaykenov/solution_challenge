@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
 import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
 import 'package:solution_challenge/constants/colors/colors.dart';
 import 'package:solution_challenge/presentation_UI/widgets/buttonWidget.dart';
@@ -13,7 +15,7 @@ class InformationPage extends StatelessWidget {
       appBar: const AppBarWidget(
         title: 'Информация',
       ),
-      body: Stack(
+      body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -81,7 +83,7 @@ class InformationPage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 60,
+                    height: 0,
                   ),
                   const Text(
                     'Категории',
@@ -115,16 +117,31 @@ class InformationPage extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
-            bottom: 20,
-            right: 30,
-            child: Center(
-              child: ButtonWidget(
-                  title: 'Сохранить',
-                  backgroundColor: mainColor,
-                  textColor: Colors.white),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: ElevatedButton(
+              // title: 'Войти',
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(mainColor),
+                textStyle:
+                    MaterialStatePropertyAll(TextStyle(color: Colors.white)),
+                elevation: MaterialStatePropertyAll(1),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DrugSearchPage(),
+                  ),
+                );
+              },
+              child: Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                child: const Text('Войти'),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
