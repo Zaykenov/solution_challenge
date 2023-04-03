@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
-import 'package:solution_challenge/constants/colors/colors.dart';
+import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/presentation_UI/widgets/buttonWidget.dart';
 
 TextEditingController email = TextEditingController();

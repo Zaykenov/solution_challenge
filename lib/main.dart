@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/login_page.dart';
-import 'package:solution_challenge/constants/colors/colors.dart';
+import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
 
