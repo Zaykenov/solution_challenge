@@ -24,7 +24,7 @@ class _NavigationPageState extends State<NavigationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'dogshit',
+        title: 'Test App',
       ),
       body: Center(
         child: options.elementAt(_index),
