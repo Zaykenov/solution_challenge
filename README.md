@@ -1,16 +1,14 @@
 # solution_challenge
 
-A new Flutter project.
+## Installation 
+To start you need to install flutter, see this link https://docs.flutter.dev/get-started/install
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Then clone our repository to your machine by typing this into the terminal
+```
+git clone https://github.com/Zaykenov/solution_challenge.git
+```
+## Usage
+After cloning the project, connect your mobile device or emulator and type this into the terminal 
+```
+flutter run
+```
