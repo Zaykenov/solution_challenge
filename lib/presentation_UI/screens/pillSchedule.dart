@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/constants/colors/colors.dart';
-import 'package:solution_challenge/presentation_UI/screens/NavigationPage.dart';
 import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
 import 'package:solution_challenge/presentation_UI/widgets/buttonWidget.dart';
@@ -17,7 +15,7 @@ class PillSchedulePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -98,25 +96,6 @@ class PillSchedulePage extends StatelessWidget {
                   width: 30,
                 ),
                 Expanded(
-                  child: Column(
-                    children: const [
-                      CircleAvatar(
-                        child: Icon(Icons.check),
-                        backgroundColor: mainColor,
-                        radius: 20,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 6.0, right: 6.0),
-                    child: const Divider(
-                      color: Colors.grey,
-                      height: 30,
-                    ),
-                  ),
                   child: Text(
                     'Таблетки',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
@@ -135,7 +114,8 @@ class PillSchedulePage extends StatelessWidget {
                   width: 25,
                 ),
                 Expanded(
-                  child: Text(
+
+child: Text(
                     'Просмотр',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                   ),
@@ -200,43 +180,13 @@ class PillSchedulePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 200,
+                    height: 60,
                   ),
                   ButtonWidget(
                       title: 'Далее',
                       backgroundColor: mainColor,
                       textColor: Colors.white)
                 ],
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(child: Text('medication')),
-                Expanded(child: Text('schedule')),
-                Expanded(child: Text('views')),
-              ],
-            ),
-            Expanded(flex: 3, child: SizedBox()),
-            ElevatedButton(
-              // title: 'Войти',
-              style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(mainColor),
-                textStyle:
-                    MaterialStatePropertyAll(TextStyle(color: Colors.white)),
-                elevation: MaterialStatePropertyAll(1),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NavigationPage(),
-                  ),
-                );
-              },
-              child: Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: const Text('Войти'),
               ),
             ),
           ],
