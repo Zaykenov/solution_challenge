@@ -13,11 +13,11 @@ class TakePillsPage extends StatefulWidget {
 }
 
 class _TakePillsPageState extends State<TakePillsPage> {
-  DateTime _currentDate = DateTime(2019, 2, 3);
-  DateTime _currentDate2 = DateTime(2019, 2, 3);
-  String _currentMonth = DateFormat.yMMM().format(DateTime(2019, 2, 3));
-  DateTime _targetDateTime = DateTime(2019, 2, 3);
-//  List<DateTime> _markedDate = [DateTime(2018, 9, 20), DateTime(2018, 10, 11)];
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  DateTime _currentDate = DateTime(2023, 5, 4);
+  DateTime _currentDate2 = DateTime(2023, 5, 4);
+
   static final Widget _eventIcon = Container(
     decoration: BoxDecoration(
         color: Colors.white,
@@ -107,14 +107,14 @@ class _TakePillsPageState extends State<TakePillsPage> {
         color: Colors.red,
       ),
       thisMonthDayBorderColor: Colors.grey,
-//          weekDays: null, /// for pass null when you do not want to render weekDays
-      headerText: 'Custom Header',
+      showWeekDays: false,
+      showHeader: false,
+      showHeaderButton: false,
       weekFormat: true,
       markedDatesMap: _markedDateMap,
-      height: 200.0,
+      height: 50.0,
       selectedDateTime: _currentDate2,
       showIconBehindDayText: true,
-//          daysHaveCircularBorder: false, /// null for not rendering any border, true for circular border, false for rectangular border
       customGridViewPhysics: const NeverScrollableScrollPhysics(),
       markedDateShowIcon: true,
       markedDateIconMaxShown: 2,
@@ -135,19 +135,22 @@ class _TakePillsPageState extends State<TakePillsPage> {
     );
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("dogshit"),
-        ),
+        backgroundColor: Colors.grey,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              //custom icon
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.0),
+                height: 150,
+                alignment: Alignment.center,
                 child: _calendarCarousel,
-              ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white,
+                ),
+              )
+              //custom icon
             ],
           ),
         ));
