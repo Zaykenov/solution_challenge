@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/constants/colors/colors.dart';
+import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
 import 'package:solution_challenge/constants/colors.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -77,38 +79,56 @@ class _DrugSearchPageState extends State<DrugSearchPage> {
                   ),
                 ),
                 Expanded(
-                    child: TextButton(
-                  onPressed: () {
-                    setState(() {
-                      searchHistory.clear();
-                    });
-                  },
-                  child: const Text(
-                    'ОЧИСТИТЬ',
-                    style: TextStyle(fontSize: 14, color: mainColor),
+                  child: TextButton(
+                    onPressed: () {
+                      setState(() {
+                        searchHistory.clear();
+                      });
+                    },
+                    child: const Text(
+                      'ОЧИСТИТЬ',
+                      style: TextStyle(fontSize: 14, color: mainColor),
+                    ),
                   ),
-                ))
+                ),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PillSchedulePage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Дальше',
+                      style: TextStyle(fontSize: 14, color: mainColor),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
           Expanded(
-              child: ListView.builder(
-                  itemCount: displayList.length,
-                  itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(color: Colors.grey))),
-                          child: ListTile(
-                            title: Text(displayList[index]),
-                            trailing: const Icon(
-                              Icons.call_made_sharp,
-                              color: mainColor,
-                            ),
-                          ),
-                        ),
-                      )))
+            child: ListView.builder(
+              itemCount: displayList.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                      border: Border(bottom: BorderSide(color: Colors.grey))),
+                  child: ListTile(
+                    title: Text(displayList[index]),
+                    trailing: const Icon(
+                      Icons.call_made_sharp,
+                      color: mainColor,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
