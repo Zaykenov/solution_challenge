@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/constants/colors.dart';
+import 'package:solution_challenge/presentation_UI/screens/take_pills_page.dart';
 import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
 import 'package:solution_challenge/presentation_UI/widgets/buttonWidget.dart';
 
@@ -114,8 +115,7 @@ class PillSchedulePage extends StatelessWidget {
                   width: 25,
                 ),
                 Expanded(
-
-child: Text(
+                  child: Text(
                     'Просмотр',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                   ),
@@ -182,10 +182,20 @@ child: Text(
                   SizedBox(
                     height: 60,
                   ),
-                  ButtonWidget(
-                      title: 'Далее',
-                      backgroundColor: mainColor,
-                      textColor: Colors.white)
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TakePillsPage(),
+                        ),
+                      );
+                    },
+                    child: ButtonWidget(
+                        title: 'Далее',
+                        backgroundColor: mainColor,
+                        textColor: Colors.white),
+                  )
                 ],
               ),
             ),

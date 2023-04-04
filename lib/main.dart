@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primaryColor: mainColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/statistics',
+      initialRoute: '/pillSchedule',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const LoginPage(),
