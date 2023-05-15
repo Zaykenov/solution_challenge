@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "161572419433",
+    "project_id": "revita-5e75c",
+    "storage_bucket": "revita-5e75c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161572419433:android:015ffdd272808af1de6ff8",
+        "android_client_info": {
+          "package_name": "com.example.solution_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161572419433-bs62v3iv7mmve5ruoq6j2cdeskh82nl5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.solution_challenge",
+            "certificate_hash": "3684db528fe094472e6091c2333b4ed1408fe20a"
+          }
+        },
+        {
+          "client_id": "161572419433-cf0d38pm9of9l252do7qit7ua2baeq2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGRpk0icW3FJ4gOTQRESLi_0RO_0YkB7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161572419433-cf0d38pm9of9l252do7qit7ua2baeq2m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
