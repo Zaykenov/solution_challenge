@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Solution Challenge',
+      title: 'Solution Challenge verstka',
       theme: ThemeData(
         primaryColor: mainColor,
         scaffoldBackgroundColor: Colors.white,
@@ -39,5 +39,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
