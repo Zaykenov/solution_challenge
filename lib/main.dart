@@ -22,10 +22,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Solution Challenge',
       theme: ThemeData(
+        fontFamily: 'Gilroy',
         primaryColor: mainColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/registration',
+      initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const LoginPage(),
@@ -39,5 +40,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

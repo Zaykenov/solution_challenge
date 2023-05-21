@@ -27,10 +27,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextFormField(
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
               ),
               onChanged: (value) {
@@ -39,10 +39,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 });
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextFormField(
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
               ),
               onChanged: (value) {
@@ -51,9 +51,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 });
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
-              child: Text('Register'),
+              child: const Text('Register'),
               onPressed: () async {
                 try {
                   final newUser = await _auth.createUserWithEmailAndPassword(

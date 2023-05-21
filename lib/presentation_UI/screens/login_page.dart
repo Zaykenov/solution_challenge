@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/profile_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/registration_page.dart';
 import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
 import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/presentation_UI/widgets/buttonWidget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 TextEditingController email = TextEditingController();
 TextEditingController password = TextEditingController();
@@ -16,11 +19,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _auth = FirebaseAuth.instance;
+
+  late String _email;
+
+  late String _password;
+
+  bool _isLoadingSignIn = false;
+  bool _isLoadingSendReset = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarWidget(
-        title: 'Вход',
+        title: 'Sign in',
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -30,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Text(
-                'Авторизуйтесь',
+                'Authorize',
                 style: TextStyle(
                     color: mainColor,
                     fontSize: 40,
@@ -45,18 +57,28 @@ class _LoginPageState extends State<LoginPage> {
                   suffixIcon: Icon(Icons.email),
                   hintText: 'Your email address',
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    _email = value.trim();
+                  });
+                },
                 autofocus: true,
               ),
               const SizedBox(
                 height: 10,
               ),
-              TextField(
+              TextFormField(
                 controller: password,
                 decoration: const InputDecoration(
                   suffixIcon: Icon(Icons.lock),
                   hintText: 'Your password',
                 ),
                 obscureText: true,
+                onChanged: (value) {
+                  setState(() {
+                    _password = value.trim();
+                  });
+                },
               ),
               const SizedBox(
                 height: 230,
@@ -64,6 +86,54 @@ class _LoginPageState extends State<LoginPage> {
               Center(
                 child: Column(
                   children: <Widget>[
+                    ElevatedButton(
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(mainColor),
+                        textStyle: MaterialStatePropertyAll(
+                            TextStyle(color: Colors.white)),
+                        elevation: MaterialStatePropertyAll(1),
+                      ),
+                      onPressed: () async {
+                        setState(() {
+                          _isLoadingSignIn = true;
+                        });
+                        try {
+                          final userCredential =
+                              await _auth.signInWithEmailAndPassword(
+                            email: _email,
+                            password: _password,
+                          );
+                          if (userCredential.user != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfilePage(),
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          print(e);
+                        } finally {
+                          setState(() {
+                            _isLoadingSignIn = false;
+                          });
+                        }
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        child: _isLoadingSignIn
+                            ? Container(
+                                width: 16,
+                                height: 16,
+                                child: const CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 3.0,
+                                ),
+                              )
+                            : const Text('Sign in'),
+                      ),
+                    ),
                     ElevatedButton(
                       // title: 'Войти',
                       style: const ButtonStyle(
@@ -76,42 +146,55 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => InformationPage(),
+                            builder: (context) => RegistrationPage(),
                           ),
                         );
                       },
                       child: Container(
                         alignment: Alignment.center,
                         width: double.infinity,
-                        child: const Text('Войти'),
+                        child: const Text('Sign up'),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
                     ElevatedButton(
-                      // title: 'Войти',
                       style: const ButtonStyle(
-                        // splashFactory: Splash,
                         overlayColor: MaterialStatePropertyAll(Colors.grey),
-
                         backgroundColor: MaterialStatePropertyAll(Colors.white),
-
                         elevation: MaterialStatePropertyAll(0),
                         side: MaterialStatePropertyAll(
                           BorderSide(width: 1, color: Colors.grey),
                         ),
                       ),
-                      onPressed: () {
-                        print('asd');
+                      onPressed: () async {
+                        setState(() {
+                          _isLoadingSendReset = true;
+                        });
+                        try {
+                          await _auth.sendPasswordResetEmail(email: _email);
+                        } catch (e) {
+                          print(e);
+                        } finally {
+                          setState(() {
+                            _isLoadingSendReset = false;
+                          });
+                        }
                       },
                       child: Container(
                         alignment: Alignment.center,
                         width: double.infinity,
-                        child: const Text(
-                          'Забыли пароль',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                        child: _isLoadingSendReset
+                            ? Container(
+                                width: 16,
+                                height: 16,
+                                child: const CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 3.0,
+                                ),
+                              )
+                            : const Text(
+                                'Forgot my Password',
+                                style: TextStyle(color: Colors.black),
+                              ),
                       ),
                     ),
                   ],
