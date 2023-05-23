@@ -45,10 +45,12 @@ dependencies:
   image: ^4.0.17
 
 flutter_native_splash:
-  color: "#ffffff"
-  image: "assets/revita_native.png"
-  android_12: 
-    image: "assets/revita_native.png"
+  image: assets/images/revita_logo.png
+  color: ffffff
+  android_disable_fullscreen: true
+  android_12:
+    image: assets/images/revita_logo.png
+    color: ffffff
 
 
 dev_dependencies:
