@@ -40,6 +40,18 @@ dependencies:
   flutter_calendar_carousel: ^2.4.2
   intl: ^0.18.0
   firebase_auth: ^4.6.0
+  flutter_native_splash: ^2.2.19
+  shared_preferences: ^2.1.1
+  image: ^4.0.17
+
+flutter_native_splash:
+  image: assets/images/revita_logo.png
+  color: ffffff
+  android_disable_fullscreen: true
+  android_12:
+    image: assets/images/revita_logo.png
+    color: ffffff
+
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +77,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/
     - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -96,3 +109,9 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: fonts/icomoon.ttf
+    - family: Gilroy
+      fonts:
+        - asset: fonts/Gilroy-Bold.ttf
+        - asset: fonts/Gilroy-Medium.ttf
+        - asset: fonts/Gilroy-Regular.ttf
+        - asset: fonts/Gilroy-SemiBold.ttf
