@@ -1,14 +1,57 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/models/user_model.dart';
 
-class EditInfoPage extends StatelessWidget {
+class EditInfoPage extends StatefulWidget {
+  @override
+  State<EditInfoPage> createState() => _EditInfoPageState();
+}
+
+class _EditInfoPageState extends State<EditInfoPage> {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController labelController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
   final TextEditingController genderController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
+
+  Future<void> sendDataToFirestore(UserModel user) async {
+    try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        String userId = currentUser.uid;
+
+        CollectionReference usersCollection =
+            FirebaseFirestore.instance.collection('users');
+        DocumentReference documentReference = usersCollection.doc(userId);
+
+        Map<String, dynamic> userData = user.toMap();
+        userData['userId'] = userId; // Add user ID to the data
+
+        await documentReference.set(userData);
+
+        print('Data sent to Firestore successfully');
+      } else {
+        print('User is not authenticated');
+      }
+    } catch (error) {
+      print('Error sending data to Firestore: $error');
+    }
+  }
+
+  void handleSubmit() {
+    UserModel user = UserModel(
+      fullName: fullNameController.text,
+      label: labelController.text,
+      phoneNumber: phoneNumberController.text,
+      country: countryController.text,
+      gender: genderController.text,
+      address: addressController.text,
+    );
+
+    sendDataToFirestore(user);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,31 +110,7 @@ class EditInfoPage extends StatelessWidget {
                 controller: addressController,
               ),
               ElevatedButton(
-                onPressed: () {
-                  // Create a UserModel instance with the data from the text fields
-                  UserModel user = UserModel(
-                      fullName: fullNameController.text,
-                      label: labelController.text,
-                      phoneNumber: phoneNumberController.text,
-                      country: countryController.text,
-                      gender: genderController.text,
-                      address: addressController.text);
-
-                  // Convert UserModel to a map
-                  Map<String, dynamic> userData = user.toMap();
-
-                  // Send data to Firestore
-                  FirebaseFirestore.instance
-                      .collection('users')
-                      .add(userData)
-                      .then((value) {
-                    // Data added successfully
-                    print('Data added to Firestore');
-                  }).catchError((error) {
-                    // Error occurred while adding data
-                    print('Error adding data to Firestore: $error');
-                  });
-                },
+                onPressed: handleSubmit,
                 child: const Text('Submit'),
               ),
               const SizedBox(height: 24.0),

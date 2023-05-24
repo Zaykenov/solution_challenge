@@ -8,7 +8,7 @@
         </intent>
     </queries>
    <application
-        android:label="solution_challenge"
+        android:label="ReVita"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
