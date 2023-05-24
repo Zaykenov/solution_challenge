@@ -11,6 +11,7 @@ class InformationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarWidget(
+        backButton: true,
         title: 'Информация',
       ),
       body: Stack(

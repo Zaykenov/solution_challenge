@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool backButton;
   const AppBarWidget({
     super.key,
     required this.title,
+    required this.backButton,
   });
 
   @override
@@ -13,9 +15,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: const BackButton(
-        color: Colors.black87,
-      ),
+      leading: backButton
+          ? const BackButton(
+              color: Colors.black87,
+            )
+          : null,
       backgroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,

@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: const AppBarWidget(
         title: 'Sign in',
+        backButton: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

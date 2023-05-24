@@ -24,6 +24,7 @@ class _NavigationPageState extends State<NavigationPage> {
     return Scaffold(
       appBar: AppBarWidget(
         title: 'Test App',
+        backButton: true,
       ),
       body: Center(
         child: options.elementAt(_index),

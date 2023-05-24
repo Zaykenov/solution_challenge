@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solution_challenge/presentation_UI/screens/onboarding_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
-import 'package:solution_challenge/presentation_UI/screens/login_page.dart';
 import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
@@ -39,8 +36,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) =>
-            seenOnboard == false ? const LoginPage() : const OnBoardingPage(),
+        '/': (context) => const OnBoardingPage(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/info': (context) => const InformationPage(),
         '/drugSearch': (context) => const DrugSearchPage(),

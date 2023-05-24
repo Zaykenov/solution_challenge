@@ -12,6 +12,7 @@ class PillSchedulePage extends StatelessWidget {
     return Scaffold(
       appBar: const AppBarWidget(
         title: 'График приема',
+        backButton: false,
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -90,13 +90,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               children: [
                 currentPage == onboardingContents.length - 1
                     ? ElevatedButton(
-                        child: const Text('Get Started'),
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginPage(),
-                              ));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -108,6 +108,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                 horizontal:
                                     24), // Adjust the padding to increase the button size
                             backgroundColor: mainColor),
+                        child: const Text('Get Started'),
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
