@@ -7,7 +7,8 @@ import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
 import 'package:solution_challenge/presentation_UI/screens/registration_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/statistics_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Solution Challenge',
       theme: ThemeData(
         fontFamily: 'Gilroy',

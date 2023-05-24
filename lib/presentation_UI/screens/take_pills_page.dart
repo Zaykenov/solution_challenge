@@ -1,9 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/date_symbol_data_file.dart';
-import 'package:intl/intl.dart';
 
 class TakePillsPage extends StatefulWidget {
   TakePillsPage({Key? key}) : super(key: key);
@@ -13,7 +10,7 @@ class TakePillsPage extends StatefulWidget {
 }
 
 class _TakePillsPageState extends State<TakePillsPage> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  // GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   DateTime _currentDate = DateTime(2023, 5, 4);
   DateTime _currentDate2 = DateTime(2023, 5, 4);

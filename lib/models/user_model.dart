@@ -1,15 +1,29 @@
-class UserInfo {
-  final String name;
-  final int age;
-  final String city;
+class UserModel {
+  // final String uId;
+  final String fullName;
+  final String label;
   final String phoneNumber;
-  final String avatarUrl;
+  final String country;
+  final String gender;
+  final String address;
 
-  UserInfo({
-    required this.name,
-    required this.age,
-    required this.city,
+  UserModel({
+    // required this.uId,
+    required this.fullName,
+    required this.label,
     required this.phoneNumber,
-    required this.avatarUrl,
+    required this.country,
+    required this.gender,
+    required this.address,
   });
+  Map<String, dynamic> toMap() {
+    return {
+      'fullName': fullName,
+      'label': label,
+      'phoneNumber': phoneNumber,
+      'country': country,
+      'gender': gender,
+      'address': address
+    };
+  }
 }

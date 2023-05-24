@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/models/user_model.dart';
 
 class EditInfoPage extends StatelessWidget {
   final TextEditingController fullNameController = TextEditingController();
@@ -12,18 +14,18 @@ class EditInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Edit profile',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -31,17 +33,17 @@ class EditInfoPage extends StatelessWidget {
                 label: 'Full Name',
                 controller: fullNameController,
               ),
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               RoundedTextField(
                 label: 'Label',
                 controller: labelController,
               ),
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               RoundedTextField(
                 label: 'Phone Number',
                 controller: phoneNumberController,
               ),
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               Row(
                 children: [
                   Expanded(
@@ -50,7 +52,7 @@ class EditInfoPage extends StatelessWidget {
                       controller: countryController,
                     ),
                   ),
-                  SizedBox(width: 12.0),
+                  const SizedBox(width: 12.0),
                   Expanded(
                     child: RoundedTextField(
                       label: 'Gender',
@@ -59,18 +61,40 @@ class EditInfoPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               RoundedTextField(
                 label: 'Address',
                 controller: addressController,
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Perform action on button press
+                  // Create a UserModel instance with the data from the text fields
+                  UserModel user = UserModel(
+                      fullName: fullNameController.text,
+                      label: labelController.text,
+                      phoneNumber: phoneNumberController.text,
+                      country: countryController.text,
+                      gender: genderController.text,
+                      address: addressController.text);
+
+                  // Convert UserModel to a map
+                  Map<String, dynamic> userData = user.toMap();
+
+                  // Send data to Firestore
+                  FirebaseFirestore.instance
+                      .collection('users')
+                      .add(userData)
+                      .then((value) {
+                    // Data added successfully
+                    print('Data added to Firestore');
+                  }).catchError((error) {
+                    // Error occurred while adding data
+                    print('Error adding data to Firestore: $error');
+                  });
                 },
-                child: Text('Submit'),
+                child: const Text('Submit'),
               ),
-              SizedBox(height: 24.0),
+              const SizedBox(height: 24.0),
             ],
           ),
         ),

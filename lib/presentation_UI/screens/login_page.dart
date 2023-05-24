@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
-import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/profile_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/registration_page.dart';
 import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
 import 'package:solution_challenge/constants/colors.dart';
-import 'package:solution_challenge/presentation_UI/widgets/buttonWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-TextEditingController email = TextEditingController();
-TextEditingController password = TextEditingController();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,11 +13,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
   final _auth = FirebaseAuth.instance;
 
   late String _email;
 
   late String _password;
+  @override
+  void initState() {
+    email.text = '';
+    password.text = '';
+    super.initState();
+  }
 
   bool _isLoadingSignIn = false;
   bool _isLoadingSendReset = false;

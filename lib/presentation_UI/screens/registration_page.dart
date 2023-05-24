@@ -20,7 +20,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registration'),
+        title: const Text('Registration'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -58,11 +58,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 try {
                   final newUser = await _auth.createUserWithEmailAndPassword(
                       email: _email, password: _password);
+                  // ignore: unnecessary_null_comparison
                   if (newUser != null) {
+                    // ignore: use_build_context_synchronously
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => InformationPage(),
+                        builder: (context) => const InformationPage(),
                       ),
                     );
                   }

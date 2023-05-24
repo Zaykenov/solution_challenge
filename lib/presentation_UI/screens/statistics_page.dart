@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/constants/icons.dart';
 
 class StatisticsPage extends StatefulWidget {
   const StatisticsPage({Key? key}) : super(key: key);

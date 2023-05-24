@@ -11,13 +11,12 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
-  @override
   int _index = 1;
 
   final options = [
-    MainPage(),
-    Text('Message'),
-    DrugSearchPage() //directly call the class to load
+    const MainPage(),
+    const Text('Message'),
+    const DrugSearchPage() //directly call the class to load
   ];
 
   @override
