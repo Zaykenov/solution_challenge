@@ -44,6 +44,10 @@ dependencies:
   shared_preferences: ^2.1.1
   image: ^4.0.17
   url_launcher: ^6.0.9
+  google_maps_flutter: ^2.2.8
+  google_maps_webservice: ^0.0.20-nullsafety.5
+  location: ^4.4.0
+  http: ^0.13.6
 
 flutter_native_splash:
   image: assets/images/revita_logo.png
