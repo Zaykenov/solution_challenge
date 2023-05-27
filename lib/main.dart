@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solution_challenge/presentation_UI/screens/map_page.dart';
-import 'package:solution_challenge/presentation_UI/screens/onboarding_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
 import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
