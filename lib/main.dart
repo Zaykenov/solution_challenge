@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:solution_challenge/presentation_UI/screens/account_settings_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/edit_info_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/onboarding_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
 import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
+import 'package:solution_challenge/presentation_UI/screens/profile_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/registration_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/statistics_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
         primaryColor: mainColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/',
+      initialRoute: '/interestsPage',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const OnBoardingPage(),
@@ -42,7 +46,11 @@ class MyApp extends StatelessWidget {
         '/drugSearch': (context) => const DrugSearchPage(),
         '/pillSchedule': (context) => const PillSchedulePage(),
         '/statistics': (context) => const StatisticsPage(),
-        '/registration': (context) => const RegistrationPage()
+        '/registration': (context) => const RegistrationPage(),
+        '/accountSettings': (context) => const AccountSettingsPage(),
+        '/editInfo': (context) => EditInfoPage(),
+        '/profilePage': (context) => ProfilePage(),
+        '/interestsPage': (context) => const InterestsPage(),
       },
     );
   }

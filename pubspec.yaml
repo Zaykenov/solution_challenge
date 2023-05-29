@@ -110,3 +110,6 @@ flutter:
     - family: Gilroy
       fonts:
         - asset: fonts/Gilroy/Gilroy-Medium.ttf
+    - family:  MyFlutterApp
+      fonts:
+        - asset: fonts/MyFlutterApp.ttf
