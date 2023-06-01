@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/main.dart';
-import 'package:solution_challenge/model/onboard_data.dart';
+import 'package:solution_challenge/models/onboard_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solution_challenge/presentation_UI/screens/login_page.dart';
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/presentation_UI/screens/edit_info_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/notifications_settings.dart';
+import 'package:solution_challenge/presentation_UI/screens/password_settings_page.dart';
 
 class AccountSettingsPage extends StatelessWidget {
   const AccountSettingsPage({Key? key}) : super(key: key);
@@ -42,7 +44,14 @@ class AccountSettingsPage extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PasswordSettingsPage(),
+                ),
+              );
+            },
             child: const ListTile(
               leading: Icon(Icons.lock_outline),
               title: Text('Security and account access'),
@@ -54,7 +63,14 @@ class AccountSettingsPage extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotificationsSettingsPage(),
+                ),
+              );
+            },
             child: const ListTile(
               leading: Icon(Icons.notifications_outlined),
               title: Text('Notifications'),

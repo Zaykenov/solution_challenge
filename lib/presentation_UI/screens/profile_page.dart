@@ -4,6 +4,7 @@ import 'package:solution_challenge/main.dart';
 import 'package:solution_challenge/presentation_UI/screens/account_settings_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:solution_challenge/presentation_UI/screens/login_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -13,6 +14,19 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  void launchPhoneApp(String phoneNumber) async {
+    final Uri phoneUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
+    } else {
+      throw 'Could not launch phone app.';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +102,11 @@ class _ProfilePageState extends State<ProfilePage> {
           Column(
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  final phoneNumber =
+                      '+87777777'; // Replace with the desired phone number
+                  launchPhoneApp(phoneNumber);
+                },
                 child: const ListTile(
                   title: Text(
                     'Help',
