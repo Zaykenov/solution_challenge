@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:solution_challenge/presentation_UI/screens/accesability_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/account_settings_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/addPill.dart';
+import 'package:solution_challenge/presentation_UI/screens/addTest.dart';
+import 'package:solution_challenge/presentation_UI/screens/edit_info_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/notifications_settings.dart';
+import 'package:solution_challenge/presentation_UI/screens/onboarding_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/map_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
 import 'package:solution_challenge/constants/colors.dart';
 import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
+import 'package:solution_challenge/presentation_UI/screens/profile_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/registration_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/statistics_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,7 +42,7 @@ class MyApp extends StatelessWidget {
         primaryColor: mainColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/',
+      initialRoute: '/addPillPage',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => MapPage(),
@@ -42,7 +51,16 @@ class MyApp extends StatelessWidget {
         '/drugSearch': (context) => const DrugSearchPage(),
         '/pillSchedule': (context) => const PillSchedulePage(),
         '/statistics': (context) => const StatisticsPage(),
-        '/registration': (context) => const RegistrationPage()
+        '/registration': (context) => const RegistrationPage(),
+        '/accountSettings': (context) => const AccountSettingsPage(),
+        '/editInfo': (context) => EditInfoPage(),
+        '/profilePage': (context) => ProfilePage(),
+        '/interestsPage': (context) => const InterestsPage(),
+        '/notificationsSettingsPage': (context) =>
+            const NotificationsSettingsPage(),
+        '/accesabilityPage': (context) => AccesabilityPage(),
+        '/addPillPage': (context) => AddPillPage(),
+        '/addTestPage': (context) => AddTestPage(),
       },
     );
   }

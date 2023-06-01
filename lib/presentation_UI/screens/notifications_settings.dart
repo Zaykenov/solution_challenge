@@ -39,6 +39,7 @@ class NotificationsSettingsPage extends StatelessWidget {
             trailing: CupertinoSwitch(
               value: false,
               onChanged: (bool value) {},
+              activeColor: Colors.blue, // Set the activeColor to blue
             ),
           ),
           ListTile(
@@ -49,6 +50,7 @@ class NotificationsSettingsPage extends StatelessWidget {
             trailing: CupertinoSwitch(
               value: false,
               onChanged: (bool value) {},
+              activeColor: Colors.blue, // Set the activeColor to blue
             ),
           ),
           ListTile(
@@ -59,6 +61,7 @@ class NotificationsSettingsPage extends StatelessWidget {
             trailing: CupertinoSwitch(
               value: false,
               onChanged: (bool value) {},
+              activeColor: Colors.blue, // Set the activeColor to blue
             ),
           ),
           const Divider(),
@@ -75,6 +78,7 @@ class NotificationsSettingsPage extends StatelessWidget {
             trailing: CupertinoSwitch(
               value: false,
               onChanged: (bool value) {},
+              activeColor: Colors.blue, // Set the activeColor to blue
             ),
           ),
           const Divider(),
@@ -91,6 +95,7 @@ class NotificationsSettingsPage extends StatelessWidget {
             trailing: CupertinoSwitch(
               value: false,
               onChanged: (bool value) {},
+              activeColor: Colors.blue, // Set the activeColor to blue
             ),
           ),
         ],
