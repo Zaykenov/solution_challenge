@@ -7,7 +7,6 @@ import 'package:solution_challenge/presentation_UI/screens/addTest.dart';
 import 'package:solution_challenge/presentation_UI/screens/edit_info_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/notifications_settings.dart';
-import 'package:solution_challenge/presentation_UI/screens/onboarding_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/map_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
 import 'package:solution_challenge/constants/colors.dart';
