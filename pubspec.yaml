@@ -48,6 +48,9 @@ dependencies:
   google_maps_webservice: ^0.0.20-nullsafety.5
   location: ^4.4.0
   http: ^0.13.6
+  google_map_polyline_new: ^0.3.0+2
+  image_picker: ^0.8.7+5
+  flutter_svg: ^2.0.6
 
 flutter_native_splash:
   image: assets/images/revita_logo.png
@@ -88,6 +91,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/svg/
     - assets/images/
     - assets/icon.png
 
