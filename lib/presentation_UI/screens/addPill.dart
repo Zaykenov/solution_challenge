@@ -14,6 +14,8 @@ class AddPillPage extends StatefulWidget {
 
 class _AddPillPageState extends State<AddPillPage> {
   String _selectedType = 'Type 1'; // Default selected type
+  TimeOfDay? _selectedTime;
+  List<TimeOfDay> _selectedTimes = [];
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class _AddPillPageState extends State<AddPillPage> {
                     children: [
                       Text(
                         'On an empty stomach',
-                        style: TextStyle(fontSize: 14),
+                        style: TextStyle(fontSize: 16),
                       ),
                       CupertinoSwitch(
                         value: false,
@@ -163,19 +165,93 @@ class _AddPillPageState extends State<AddPillPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TakePillsPage(),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        Wrap(
+                          children: _selectedTimes.asMap().entries.map((entry) {
+                            final index = entry.key;
+                            final time = entry.value;
+                            return Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    '${time.format(context)}',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.close,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _selectedTimes.removeAt(index);
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          spacing: 10,
                         ),
-                      );
-                    },
-                    child: ButtonWidget(
-                        title: 'Add to Schedule',
-                        backgroundColor: mainColor,
-                        textColor: Colors.white),
+                        SizedBox(width: 8),
+                        TextButton(
+                          onPressed: () async {
+                            final selectedTime = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.now(),
+                            );
+                            if (selectedTime != null) {
+                              setState(() {
+                                _selectedTimes.add(selectedTime);
+                              });
+                            }
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: CircleBorder(),
+                            padding: const EdgeInsets.all(16),
+                          ),
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 210,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TakePillsPage(),
+                              ),
+                            );
+                          },
+                          child: ButtonWidget(
+                            title: 'Add to Schedule',
+                            backgroundColor: mainColor,
+                            textColor: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

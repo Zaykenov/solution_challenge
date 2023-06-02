@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         primaryColor: mainColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/addPillPage',
+      initialRoute: '/interestsPage',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => MapPage(),
