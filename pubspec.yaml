@@ -51,6 +51,8 @@ dependencies:
   google_map_polyline_new: ^0.3.0+2
   image_picker: ^0.8.7+5
   flutter_svg: ^2.0.6
+  graphql_flutter: ^5.1.2
+  shimmer: ^3.0.0
 
 flutter_native_splash:
   image: assets/images/revita_logo.png

@@ -8,6 +8,7 @@ class UserModel {
   final String? address;
   final String? docURL;
   final String? avatarURL;
+  final String? userMail;
 
   UserModel({
     // required this.uId,
@@ -19,6 +20,7 @@ class UserModel {
     this.address,
     this.docURL,
     this.avatarURL,
+    this.userMail,
   });
   Map<String, dynamic> toMap() {
     return {
@@ -29,7 +31,8 @@ class UserModel {
       'gender': gender,
       'address': address,
       'docURL': docURL,
-      'avatarURL' : avatarURL,
+      'avatarURL': avatarURL,
+      'userMail' : userMail,
     };
   }
 }
