@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solution_challenge/presentation_UI/screens/accesability_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/account_settings_page.dart';
@@ -23,6 +24,7 @@ bool? seenOnboard;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initHiveForFlutter();
   await Firebase.initializeApp();
   SharedPreferences pref = await SharedPreferences.getInstance();
   seenOnboard = pref.getBool('seenOnboard') ?? false; //if null set to false
