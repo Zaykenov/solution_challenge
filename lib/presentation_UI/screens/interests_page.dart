@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:solution_challenge/business_logic/article_service.dart';
 import '../../models/article_data.dart';
 import '../widgets/bottomBarWidget.dart';
+import 'package:solution_challenge/presentation_UI/screens/article_page.dart';
 
 class InterestsPage extends StatefulWidget {
-  const InterestsPage({super.key});
+  const InterestsPage({Key? key}) : super(key: key);
 
   @override
   State<InterestsPage> createState() => _InterestsPageState();
@@ -15,6 +16,287 @@ class _InterestsPageState extends State<InterestsPage> {
   int _currentIndex = 0;
   List<Article> articles = [];
   bool _loading = true;
+  int _selectedButtonIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      fetchData();
+    });
+  }
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF6F6F6),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Map",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      width: 350,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/mini_map.png'),
+                          fit: BoxFit.fill,
+                        ),
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 20,
+                      left: 20,
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // Button's onPressed logic
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2E3F51),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                            textStyle: const TextStyle(fontSize: 12),
+                          ),
+                          child: const Row(
+                            children: [
+                              Text('Search pharmacy'),
+                              SizedBox(width: 8),
+                              Icon(Icons.arrow_forward_ios, size: 12),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  "Call",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  width: 350,
+                  height: 130,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.grey,
+                  ),
+                ),
+                Center(
+                  child: TextButton(
+                    child: const Text(
+                      'Show all',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                const Text(
+                  "Blog",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedButtonIndex = 0;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: _selectedButtonIndex == 0
+                                ? Color(0xFF2E3F51)
+                                : null,
+                          ),
+                          padding: EdgeInsets.all(8),
+                          child: Text(
+                            'Latest',
+                            style: TextStyle(
+                              color: _selectedButtonIndex == 0
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10), // Add spacing between buttons
+                      ...articles
+                          .map((article) => article.categories)
+                          .expand((categories) =>
+                              categories) // Flatten the nested list of categories
+                          .map((category) => category.name)
+                          .toSet() // Convert to Set to remove duplicates
+                          .toList()
+                          .asMap()
+                          .entries
+                          .map((entry) {
+                        final index = entry.key + 1;
+                        final categoryName = entry.value;
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedButtonIndex = index;
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: _selectedButtonIndex == index
+                                  ? Color(0xFF2E3F51)
+                                  : null,
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Text(
+                              categoryName,
+                              style: TextStyle(
+                                color: _selectedButtonIndex == index
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Expanded(
+                  child: _loading
+                      ? const Center(child: CircularProgressIndicator())
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: articles.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Container(
+                                  height: 90, // Adjust the height as desired
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Center(
+                                    child: ListTile(
+                                      leading: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            5), // Adjust the border radius as desired
+                                        child: Container(
+                                          width: 60,
+                                          height:
+                                              70, // Adjust the height as desired
+                                          child: CachedNetworkImage(
+                                            imageUrl: articles[index].image,
+                                            fit: BoxFit.cover,
+                                            placeholder: (context, url) =>
+                                                CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Icon(Icons.error),
+                                          ),
+                                        ),
+                                      ),
+                                      title: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            articles[index]
+                                                .categories
+                                                .map(
+                                                    (category) => category.name)
+                                                .join(', '),
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "${articles[index].time_to_read} min reads",
+                                            style: TextStyle(fontSize: 11),
+                                          ),
+                                        ],
+                                      ),
+                                      subtitle: Text(
+                                        articles[index].header,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Gilroy',
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ArticlePage(
+                                                article: articles[index]),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                              ],
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: RoundedBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTabTapped: _onTabTapped,
+      ),
+    );
+  }
 
   void fetchData() async {
     try {
@@ -31,201 +313,5 @@ class _InterestsPageState extends State<InterestsPage> {
         _loading = false;
       });
     }
-
-    @override
-    void initState() {
-      // TODO: implement initState
-      super.initState();
-      fetchData();
-    }
-
-    void _onTabTapped(int index) {
-      setState(() {
-        _currentIndex = index;
-      });
-    }
-
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        backgroundColor: const Color(0xFFF6F6F6),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Map",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Stack(
-                    children: [
-                      Container(
-                        width: 350,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/mini_map.png'),
-                            fit: BoxFit.fill,
-                          ),
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 20,
-                        left: 20,
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Button's onPressed logic
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2E3F51),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 12),
-                              textStyle: const TextStyle(fontSize: 12),
-                            ),
-                            child: const Row(
-                              children: [
-                                Text('Search pharmacy'),
-                                SizedBox(width: 8),
-                                Icon(Icons.arrow_forward_ios, size: 12),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    "Call",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 350,
-                    height: 130,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Center(
-                    child: TextButton(
-                      child: const Text(
-                        'Show all',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                  const Text(
-                    "Blog",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Expanded(
-                    child: _loading
-                        ? const Center(child: CircularProgressIndicator())
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: articles.length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Container(
-                                    height: 90, // Adjust the height as desired
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Center(
-                                      child: ListTile(
-                                        leading: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                              5), // Adjust the border radius as desired
-                                          child: Container(
-                                            width: 60,
-                                            height:
-                                                70, // Adjust the height as desired
-                                            child: Image.network(
-                                              articles[index].image,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        title: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              articles[index].categories.name,
-                                              style: TextStyle(
-                                                  fontSize: 11,
-                                                  color: Colors.grey),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              "${articles[index].time_to_read} min reads",
-                                              style: TextStyle(fontSize: 11),
-                                            ),
-                                          ],
-                                        ),
-                                        subtitle: Text(
-                                          articles[index].header,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700,
-                                            fontFamily: 'Gilroy',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 15),
-                                ],
-                              );
-                            },
-                          ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        bottomNavigationBar: RoundedBottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTabTapped: _onTabTapped,
-        ),
-      );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
   }
 }
