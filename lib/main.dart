@@ -5,6 +5,7 @@ import 'package:solution_challenge/presentation_UI/screens/accesability_page.dar
 import 'package:solution_challenge/presentation_UI/screens/account_settings_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/addPill.dart';
 import 'package:solution_challenge/presentation_UI/screens/addTest.dart';
+import 'package:solution_challenge/presentation_UI/screens/doctor_appointmentPage.dart';
 import 'package:solution_challenge/presentation_UI/screens/edit_info_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/notifications_settings.dart';
@@ -24,7 +25,6 @@ bool? seenOnboard;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initHiveForFlutter();
   await Firebase.initializeApp();
   SharedPreferences pref = await SharedPreferences.getInstance();
   seenOnboard = pref.getBool('seenOnboard') ?? false; //if null set to false
@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
         '/accesabilityPage': (context) => AccesabilityPage(),
         '/addPillPage': (context) => AddPillPage(),
         '/addTestPage': (context) => AddTestPage(),
+        '/bookingPage': (context) => DoctorAppointmentPage(),
       },
     );
   }

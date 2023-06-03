@@ -53,6 +53,8 @@ dependencies:
   flutter_svg: ^2.0.6
   graphql_flutter: ^5.1.2
   cached_network_image: ^3.2.3
+  graphql_flutter: ^5.1.2
+  shimmer: ^3.0.0
 
 flutter_native_splash:
   image: assets/images/revita_logo.png
