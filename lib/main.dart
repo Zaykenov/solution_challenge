@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/interestsPage',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => InterestsPage(),
+        '/': (context) => MapPage(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/info': (context) => const InformationPage(),
         '/drugSearch': (context) => const DrugSearchPage(),

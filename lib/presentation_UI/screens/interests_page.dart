@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/business_logic/article_service.dart';
+import 'package:solution_challenge/business_logic/doctors_service.dart';
+import 'package:solution_challenge/models/doctors_data.dart';
 import '../../models/article_data.dart';
 import '../widgets/bottomBarWidget.dart';
 import 'package:solution_challenge/presentation_UI/screens/article_page.dart';
@@ -15,6 +17,7 @@ class InterestsPage extends StatefulWidget {
 class _InterestsPageState extends State<InterestsPage> {
   int _currentIndex = 0;
   List<Article> articles = [];
+  List<Doctors> doctors = [];
   bool _loading = true;
   int _selectedButtonIndex = 0;
 
@@ -106,11 +109,57 @@ class _InterestsPageState extends State<InterestsPage> {
                   height: 15,
                 ),
                 Container(
-                  width: 350,
-                  height: 130,
+                  height: 90,
                   decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.grey,
+                  ),
+                  child: Center(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30, // Adjust the radius as desired
+                        backgroundImage: doctors.isNotEmpty
+                            ? CachedNetworkImageProvider(doctors[0].image)
+                            : null, // Display the image if doctors list is not empty
+                        child: doctors.isEmpty
+                            ? Icon(Icons
+                                .person) // Display a default icon if doctors list is empty
+                            : null,
+                      ),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            doctors.isNotEmpty
+                                ? "${doctors[0].name}"
+                                : '', // Return an empty string if doctors list is empty
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w700),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              // Button's onPressed logic
+                            },
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                backgroundColor: Color(
+                                    0xFF2E3F51) // Customize the button color
+                                ),
+                            child: Text(
+                              'Book Appointment',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 Center(
@@ -301,9 +350,11 @@ class _InterestsPageState extends State<InterestsPage> {
   void fetchData() async {
     try {
       List<Article> data = await ArticleService.fetchData();
+      List<Doctors> doctorData = await DoctorsService.fetchData();
 
       setState(() {
         articles = data;
+        doctors = doctorData;
         _loading = false;
       });
     } catch (e) {
