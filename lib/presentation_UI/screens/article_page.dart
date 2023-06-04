@@ -102,10 +102,7 @@ class _ArticlePageState extends State<ArticlePage> {
           ),
         ],
       ),
-      bottomNavigationBar: RoundedBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTabTapped: _onTabTapped,
-      ),
+      bottomNavigationBar: RoundedBottomNavigationBar(),
     );
   }
 

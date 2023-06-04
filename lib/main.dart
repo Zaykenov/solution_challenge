@@ -25,6 +25,7 @@ bool? seenOnboard;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initHiveForFlutter();
   await Firebase.initializeApp();
   SharedPreferences pref = await SharedPreferences.getInstance();
   seenOnboard = pref.getBool('seenOnboard') ?? false; //if null set to false

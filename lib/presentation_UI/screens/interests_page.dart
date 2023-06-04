@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:solution_challenge/business_logic/article_service.dart';
 import 'package:solution_challenge/business_logic/doctors_service.dart';
 import 'package:solution_challenge/models/doctors_data.dart';
+import 'package:solution_challenge/presentation_UI/screens/doctor_appointmentPage.dart';
+import 'package:solution_challenge/presentation_UI/screens/map_page.dart';
 import '../../models/article_data.dart';
 import '../widgets/bottomBarWidget.dart';
 import 'package:solution_challenge/presentation_UI/screens/article_page.dart';
@@ -75,6 +77,13 @@ class _InterestsPageState extends State<InterestsPage> {
                         alignment: Alignment.bottomLeft,
                         child: ElevatedButton(
                           onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MapPage(),
+                              ),
+                            );
+
                             // Button's onPressed logic
                           },
                           style: ElevatedButton.styleFrom(
@@ -141,6 +150,12 @@ class _InterestsPageState extends State<InterestsPage> {
                           ),
                           ElevatedButton(
                             onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DoctorAppointmentPage(),
+                                ),
+                              );
                               // Button's onPressed logic
                             },
                             style: ElevatedButton.styleFrom(
@@ -340,10 +355,7 @@ class _InterestsPageState extends State<InterestsPage> {
           ),
         ),
       ),
-      bottomNavigationBar: RoundedBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTabTapped: _onTabTapped,
-      ),
+      bottomNavigationBar: RoundedBottomNavigationBar(),
     );
   }
 

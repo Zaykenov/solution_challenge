@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:solution_challenge/presentation_UI/screens/login_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../widgets/bottomBarWidget.dart';
+
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
 
@@ -139,11 +141,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 'App version 1.0.0',
                 style: TextStyle(color: Colors.grey),
               ),
-              const SizedBox(height: 50)
+              const SizedBox(height: 50),
             ],
           ),
         ],
       ),
+      bottomNavigationBar: RoundedBottomNavigationBar(),
     );
   }
 }
