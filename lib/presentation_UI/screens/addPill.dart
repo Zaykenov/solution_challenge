@@ -14,7 +14,7 @@ class AddPillPage extends StatefulWidget {
 
 class _AddPillPageState extends State<AddPillPage> {
   String _selectedType = 'Type 1'; // Default selected type
-  TimeOfDay? _selectedTime;
+  // TimeOfDay? _selectedTime;
   List<TimeOfDay> _selectedTimes = [];
 
   @override

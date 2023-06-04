@@ -1,162 +1,129 @@
-import "package:flutter/material.dart";
-import 'package:flutter_calendar_carousel/classes/event.dart';
-import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
+import 'package:flutter/material.dart';
 
 class TakePillsPage extends StatefulWidget {
-  TakePillsPage({Key? key}) : super(key: key);
+  const TakePillsPage({Key? key}) : super(key: key);
 
   @override
-  State<TakePillsPage> createState() => _TakePillsPageState();
+  _TakePillsPageState createState() => _TakePillsPageState();
 }
 
 class _TakePillsPageState extends State<TakePillsPage> {
-  // GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  DateTime _selectedDate = DateTime.now();
 
-  DateTime _currentDate = DateTime(2023, 5, 4);
-  DateTime _currentDate2 = DateTime(2023, 5, 4);
-
-  static final Widget _eventIcon = Container(
-    decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(1000)),
-        border: Border.all(color: Colors.blue, width: 2.0)),
-    child: const Icon(
-      Icons.person,
-      color: Colors.amber,
-    ),
-  );
-
-  final EventList<Event> _markedDateMap = EventList<Event>(
-    events: {
-      DateTime(2019, 2, 10): [
-        Event(
-          date: DateTime(2019, 2, 10),
-          title: 'Event 1',
-          icon: _eventIcon,
-          dot: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 1.0),
-            color: Colors.red,
-            height: 5.0,
-            width: 5.0,
-          ),
-        ),
-        Event(
-          date: DateTime(2019, 2, 10),
-          title: 'Event 2',
-          icon: _eventIcon,
-        ),
-        Event(
-          date: DateTime(2019, 2, 10),
-          title: 'Event 3',
-          icon: _eventIcon,
-        ),
-      ],
-    },
-  );
-
-  @override
-  void initState() {
-    _markedDateMap.add(
-        DateTime(2019, 2, 25),
-        Event(
-          date: DateTime(2019, 2, 25),
-          title: 'Event 5',
-          icon: _eventIcon,
-        ));
-
-    _markedDateMap.add(
-        DateTime(2019, 2, 10),
-        Event(
-          date: DateTime(2019, 2, 10),
-          title: 'Event 4',
-          icon: _eventIcon,
-        ));
-
-    _markedDateMap.addAll(DateTime(2019, 2, 11), [
-      Event(
-        date: DateTime(2019, 2, 11),
-        title: 'Event 1',
-        icon: _eventIcon,
-      ),
-      Event(
-        date: DateTime(2019, 2, 11),
-        title: 'Event 2',
-        icon: _eventIcon,
-      ),
-      Event(
-        date: DateTime(2019, 2, 11),
-        title: 'Event 3',
-        icon: _eventIcon,
-      ),
-    ]);
-    super.initState();
-  }
+  final List<Pill> _pillList = [
+    Pill('Paracetamol', isTaken: false),
+    Pill('Aciclovir', isTaken: true),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    /// Example with custom icon
-    final _calendarCarousel = CalendarCarousel<Event>(
-      onDayPressed: (date, events) {
-        setState(() => _currentDate = date);
-        events.forEach((event) => print(event.title));
-      },
-      weekendTextStyle: const TextStyle(
-        color: Colors.red,
-      ),
-      thisMonthDayBorderColor: Colors.grey,
-      showWeekDays: false,
-      showHeader: false,
-      showHeaderButton: false,
-      weekFormat: true,
-      markedDatesMap: _markedDateMap,
-      height: 50.0,
-      selectedDateTime: _currentDate2,
-      showIconBehindDayText: true,
-      customGridViewPhysics: const NeverScrollableScrollPhysics(),
-      markedDateShowIcon: true,
-      markedDateIconMaxShown: 2,
-      selectedDayTextStyle: const TextStyle(
-        color: Colors.yellow,
-      ),
-      todayTextStyle: const TextStyle(
-        color: Colors.blue,
-      ),
-      markedDateIconBuilder: (event) {
-        return event.icon ?? const Icon(Icons.help_outline);
-      },
-      minSelectedDate: _currentDate.subtract(const Duration(days: 360)),
-      maxSelectedDate: _currentDate.add(const Duration(days: 360)),
-      todayButtonColor: Colors.transparent,
-      todayBorderColor: Colors.green,
-      markedDateMoreShowTotal: true,
-    );
-
     return Scaffold(
-        backgroundColor: Colors.grey,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                height: 150,
-                alignment: Alignment.center,
-                child: _calendarCarousel,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.white,
+      appBar: AppBar(
+        toolbarHeight: 50,
+        title: Container(
+          height: 85,
+          child: buildDateSelector(),
+        ),
+      ),
+      body: buildPillList(),
+    );
+  }
+
+  Widget buildDateSelector() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: 30,
+      itemBuilder: (context, index) {
+        final date = DateTime.now().add(Duration(days: index));
+        final isSelected = _selectedDate.year == date.year &&
+            _selectedDate.month == date.month &&
+            _selectedDate.day == date.day;
+
+        final isToday = DateTime.now().year == date.year &&
+            DateTime.now().month == date.month &&
+            DateTime.now().day == date.day;
+
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              _selectedDate = date;
+            });
+            _fetchReservedTimeSlots();
+          },
+          child: Container(
+            width: 56,
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(
+              color: isSelected ? Colors.blue : Colors.transparent,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '${date.day}',
+                  style: TextStyle(
+                    color: isSelected ? Colors.white : Colors.black,
+                    fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                    fontSize: 18,
+                  ),
                 ),
-              )
-              //custom icon
-            ],
+                if (isToday)
+                  Container(
+                    width: 56,
+                    height: 24,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(25),
+                        bottomRight: Radius.circular(25),
+                      ),
+                    ),
+                    child: Text(
+                      'Today',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ));
+        );
+      },
+    );
+  }
+
+  Widget buildPillList() {
+    return ListView.builder(
+      itemCount: _pillList.length,
+      itemBuilder: (context, index) {
+        final pill = _pillList[index];
+        final isHighlighted = pill.isTaken;
+
+        return ListTile(
+          title: Text(
+            pill.name,
+            style: TextStyle(
+              fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+          tileColor: isHighlighted ? Colors.yellow : null,
+        );
+      },
+    );
+  }
+
+  void _fetchReservedTimeSlots() {
+    // TODO: Fetch the reserved time slots for the selected date
   }
 }
 
 class Pill {
-  String name;
-  bool isTaken;
+  final String name;
+  final bool isTaken;
 
   Pill(this.name, {this.isTaken = false});
 }

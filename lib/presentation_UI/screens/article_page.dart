@@ -102,7 +102,7 @@ class _ArticlePageState extends State<ArticlePage> {
           ),
         ],
       ),
-      bottomNavigationBar: RoundedBottomNavigationBar(),
+      // bottomNavigationBar: RoundedBottomNavigationBar(),
     );
   }
 

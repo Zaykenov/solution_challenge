@@ -11,7 +11,7 @@ class PillSchedulePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarWidget(
-        title: 'График приема',
+        title: 'Pill Schedule',
         backButton: false,
       ),
       body: SingleChildScrollView(

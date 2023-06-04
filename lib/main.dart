@@ -8,6 +8,7 @@ import 'package:solution_challenge/presentation_UI/screens/addTest.dart';
 import 'package:solution_challenge/presentation_UI/screens/doctor_appointmentPage.dart';
 import 'package:solution_challenge/presentation_UI/screens/edit_info_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/login_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/notifications_settings.dart';
 import 'package:solution_challenge/presentation_UI/screens/map_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         primaryColor: mainColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/interestsPage',
+      initialRoute: '/login',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => MapPage(),
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
         '/addPillPage': (context) => AddPillPage(),
         '/addTestPage': (context) => AddTestPage(),
         '/bookingPage': (context) => DoctorAppointmentPage(),
+        '/login': (context) => LoginPage(),
       },
     );
   }

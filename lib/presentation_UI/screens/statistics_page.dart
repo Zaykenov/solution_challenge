@@ -123,7 +123,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: RoundedBottomNavigationBar(),
+      // bottomNavigationBar: RoundedBottomNavigationBar(),
     );
   }
 

@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/my_flutter_app_icons.dart';
 import 'package:solution_challenge/presentation_UI/screens/MainPage.dart';
+import 'package:solution_challenge/presentation_UI/screens/article_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
+import 'package:solution_challenge/presentation_UI/screens/profile_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/statistics_page.dart';
+import 'package:solution_challenge/presentation_UI/screens/take_pills_page.dart';
 import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -14,35 +21,44 @@ class _NavigationPageState extends State<NavigationPage> {
   int _index = 1;
 
   final options = [
-    const MainPage(),
-    const Text('Message'),
-    const DrugSearchPage() //directly call the class to load
+    TakePillsPage(),
+    const StatisticsPage(),
+    InterestsPage(),
+    ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(
-        title: 'Test App',
-        backButton: true,
-      ),
+      // appBar: AppBarWidget(
+      // title: 'Test App',
+      // backButton: true,
+      // ),
       body: Center(
         child: options.elementAt(_index),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.blue,
+        elevation: 0,
+        unselectedItemColor: Colors.grey,
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'message',
+            icon: Icon(MyFlutterApp.chart_bar),
+            label: 'Health & Wellness',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MyFlutterApp.heart),
+            label: 'Feed',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'profile',
-          )
+            label: 'Profile',
+          ),
         ],
         currentIndex: _index,
         onTap: _onTapped,

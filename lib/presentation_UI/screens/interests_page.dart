@@ -355,7 +355,7 @@ class _InterestsPageState extends State<InterestsPage> {
           ),
         ),
       ),
-      bottomNavigationBar: RoundedBottomNavigationBar(),
+      // bottomNavigationBar: RoundedBottomNavigationBar(),
     );
   }
 
