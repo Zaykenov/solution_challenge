@@ -131,3 +131,8 @@ After cloning the project, connect your mobile device or emulator and type this 
 ```
 flutter run
 ```
+Developed by:
+
+-   [Temirlan Zaykenov](https://github.com/Zaykenov)
+-   [Yernur Beisenbek](https://github.com/YernurBeisenbek)
+-   [Dinmukhamed Nuran](https://github.com/ndimqa)
