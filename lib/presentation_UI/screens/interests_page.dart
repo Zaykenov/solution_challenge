@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/my_flutter_app_icons.dart';
 
 import '../../models/article_data.dart';
 import '../widgets/bottomBarWidget.dart';

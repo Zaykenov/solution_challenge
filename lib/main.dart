@@ -4,10 +4,10 @@ import 'package:solution_challenge/presentation_UI/screens/accesability_page.dar
 import 'package:solution_challenge/presentation_UI/screens/account_settings_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/addPill.dart';
 import 'package:solution_challenge/presentation_UI/screens/addTest.dart';
+import 'package:solution_challenge/presentation_UI/screens/doctor_appointmentPage.dart';
 import 'package:solution_challenge/presentation_UI/screens/edit_info_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/notifications_settings.dart';
-import 'package:solution_challenge/presentation_UI/screens/onboarding_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/map_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/information_page.dart';
 import 'package:solution_challenge/constants/colors.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         primaryColor: mainColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/addPillPage',
+      initialRoute: '/statistics',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => MapPage(),
@@ -61,6 +61,7 @@ class MyApp extends StatelessWidget {
         '/accesabilityPage': (context) => AccesabilityPage(),
         '/addPillPage': (context) => AddPillPage(),
         '/addTestPage': (context) => AddTestPage(),
+        '/bookingPage' : (context) => DoctorAppointmentPage(),
       },
     );
   }
