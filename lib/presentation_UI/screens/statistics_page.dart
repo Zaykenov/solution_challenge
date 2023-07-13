@@ -15,6 +15,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
     'Oxygen Saturation': '',
     'Weight': '',
     'Temperature': '',
+    'Blood Pressure': ''
     // Add more medical indicators here
   };
 
@@ -32,54 +33,35 @@ class _StatisticsPageState extends State<StatisticsPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Med.Indicators",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: MedicalIndicatorContainer(
-                    size: 1,
-                    icon: 'assets/images/Heart.png',
-                    title: 'Heart Rate',
-                    data: medicalData['Heart Rate']!,
-                    onAddData: () {
-                      _showAddDataDialog('Heart Rate');
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: MedicalIndicatorContainer(
-                    size: 0.7,
-                    icon: 'assets/images/oxygen.png',
-                    title: 'Oxygen Saturation',
-                    data: medicalData['Oxygen Saturation']!,
-                    onAddData: () {
-                      _showAddDataDialog('Oxygen Saturation');
-                    },
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Med.Indicators",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
                     children: [
+                      MedicalIndicatorContainer(
+                        size: 1,
+                        icon: 'assets/images/Heart.png',
+                        title: 'Heart Rate',
+                        data: medicalData['Heart Rate']!,
+                        onAddData: () {
+                          _showAddDataDialog('Heart Rate');
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       MedicalIndicatorContainer(
                         size: 0.6,
                         icon: 'assets/images/weight.png',
@@ -91,13 +73,10 @@ class _StatisticsPageState extends State<StatisticsPage> {
                       ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Column(
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
                     children: [
                       MedicalIndicatorContainer(
                         size: 0.8,
@@ -108,19 +87,34 @@ class _StatisticsPageState extends State<StatisticsPage> {
                           _showAddDataDialog('Temperature');
                         },
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MedicalIndicatorContainer(
+                        size: 0.7,
+                        icon: 'assets/images/oxygen.png',
+                        title: 'Oxygen Saturation',
+                        data: medicalData['Oxygen Saturation']!,
+                        onAddData: () {
+                          _showAddDataDialog('Oxygen Saturation');
+                        },
+                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Text(
-              "Physical/Emotional State",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-            ),
-          ],
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "Physical/Emotional State",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
         ),
       ),
       // bottomNavigationBar: RoundedBottomNavigationBar(),

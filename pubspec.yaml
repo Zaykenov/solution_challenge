@@ -55,6 +55,7 @@ dependencies:
   cached_network_image: ^3.2.3
   shimmer: ^3.0.0
   bloc: ^8.1.2
+  firebase_storage: ^11.2.4
 
 flutter_native_splash:
   image: assets/images/revita_logo.png

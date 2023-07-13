@@ -5,6 +5,9 @@ import 'package:solution_challenge/presentation_UI/screens/account_settings_page
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:solution_challenge/presentation_UI/screens/login_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'dart:io';
 
 import '../widgets/bottomBarWidget.dart';
 
@@ -16,6 +19,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  XFile? _imageFile;
+
   void launchPhoneApp(String phoneNumber) async {
     final Uri phoneUri = Uri(
       scheme: 'tel',
@@ -53,9 +58,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 InkWell(
                   onTap: () {},
                   child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      // backgroundImage: AssetImage('assets'),
+                    leading: GestureDetector(
+                      onTap: _pickImage,
+                      child: CircleAvatar(
+                        radius: 30,
+                        // backgroundImage: _imageFile != null ? _imageFile ,
+                        backgroundImage: _imageFile != null
+                            ? FileImage(File(_imageFile!.path))
+                            : null,
+                        // child: _imageFile == null ? Icon(Icons.person) : null,
+                      ),
                     ),
                     title: Text('Azamat'),
                     subtitle: Text('+7 777 77 77'),
@@ -148,6 +160,16 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       // bottomNavigationBar: RoundedBottomNavigationBar(),
     );
+  }
+
+  Future<void> _pickImage() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _imageFile = pickedImage;
+      });
+    }
   }
 }
 
