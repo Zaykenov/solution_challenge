@@ -6,7 +6,6 @@ import 'package:solution_challenge/models/doctors_data.dart';
 import 'package:solution_challenge/presentation_UI/screens/doctor_appointmentPage.dart';
 import 'package:solution_challenge/presentation_UI/screens/map_page.dart';
 import '../../models/article_data.dart';
-import '../widgets/bottomBarWidget.dart';
 import 'package:solution_challenge/presentation_UI/screens/article_page.dart';
 
 class InterestsPage extends StatefulWidget {

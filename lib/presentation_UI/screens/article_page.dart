@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../models/article_data.dart';
-import '../widgets/bottomBarWidget.dart';
 
 class ArticlePage extends StatefulWidget {
   final Article article;

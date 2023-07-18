@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-import '../widgets/bottomBarWidget.dart';
+// import '../widgets/bottomBarWidget.dart';
 
 class StatisticsPage extends StatefulWidget {
   const StatisticsPage({Key? key}) : super(key: key);
@@ -16,7 +17,6 @@ class _StatisticsPageState extends State<StatisticsPage> {
     'Weight': '',
     'Temperature': '',
     'Blood Pressure': ''
-    // Add more medical indicators here
   };
 
   @override
@@ -47,12 +47,14 @@ class _StatisticsPageState extends State<StatisticsPage> {
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     children: [
                       MedicalIndicatorContainer(
-                        size: 1,
-                        icon: 'assets/images/Heart.png',
+                        heart: true,
+                        size: 0.237,
+                        icon: 'assets/svg/heart_rate.svg',
                         title: 'Heart Rate',
                         data: medicalData['Heart Rate']!,
                         onAddData: () {
@@ -60,11 +62,12 @@ class _StatisticsPageState extends State<StatisticsPage> {
                         },
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       MedicalIndicatorContainer(
-                        size: 0.6,
-                        icon: 'assets/images/weight.png',
+                        heart: false,
+                        size: 0.09,
+                        icon: 'assets/svg/weight.svg',
                         title: 'Weight',
                         data: medicalData['Weight']!,
                         onAddData: () {
@@ -79,32 +82,42 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   Column(
                     children: [
                       MedicalIndicatorContainer(
-                        size: 0.8,
-                        icon: 'assets/images/temperature.png',
-                        title: 'Temperature',
-                        data: medicalData['Temperature']!,
-                        onAddData: () {
-                          _showAddDataDialog('Temperature');
-                        },
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      MedicalIndicatorContainer(
-                        size: 0.7,
-                        icon: 'assets/images/oxygen.png',
+                        heart: false,
+                        size: 0.113,
+                        icon: 'assets/svg/oxygen_saturation.svg',
                         title: 'Oxygen Saturation',
                         data: medicalData['Oxygen Saturation']!,
                         onAddData: () {
                           _showAddDataDialog('Oxygen Saturation');
                         },
                       ),
+                      SizedBox(height: 10),
+                      MedicalIndicatorContainer(
+                        heart: false,
+                        size: 0.113,
+                        icon: 'assets/svg/pressure.svg',
+                        title: 'Blood Pressure',
+                        data: medicalData['Blood Pressure']!,
+                        onAddData: () {
+                          _showAddDataDialog('Blood Pressure');
+                        },
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MedicalIndicatorContainer(
+                        heart: false,
+                        size: 0.09,
+                        icon: 'assets/svg/temperature.svg',
+                        title: 'Temperature',
+                        data: medicalData['Temperature']!,
+                        onAddData: () {
+                          _showAddDataDialog('Temperature');
+                        },
+                      ),
                     ],
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 10,
               ),
               SizedBox(
                 height: 15,
@@ -130,6 +143,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
         return AlertDialog(
           title: Text('Add Data'),
           content: TextField(
+            keyboardType: TextInputType.datetime,
             onChanged: (value) {
               inputData = value;
             },
@@ -157,6 +171,7 @@ class MedicalIndicatorContainer extends StatelessWidget {
   final String data;
   final VoidCallback onAddData;
   final double size;
+  final bool heart;
 
   const MedicalIndicatorContainer({
     required this.icon,
@@ -164,39 +179,172 @@ class MedicalIndicatorContainer extends StatelessWidget {
     required this.data,
     required this.onAddData,
     required this.size,
+    required this.heart,
   });
+
+  Color _getIndicatorColor(String indicator, String value) {
+    if (value.isEmpty) {
+      return Colors.black; // Default color when no value is provided
+    }
+
+    if (indicator == 'Heart Rate') {
+      final int heartRate = int.tryParse(value) ?? 0;
+      if (heartRate < 60) {
+        return Colors.red; // Very low
+      } else if (heartRate >= 60 && heartRate <= 100) {
+        return Colors.green; // Normal
+      } else {
+        return Colors.yellow; // Low
+      }
+    } else if (indicator == 'Oxygen Saturation') {
+      final int oxygenSaturation = int.tryParse(value) ?? 0;
+      if (oxygenSaturation < 95) {
+        return Colors.red; // Very low
+      } else if (oxygenSaturation >= 95 && oxygenSaturation <= 100) {
+        return Colors.green; // Normal
+      } else {
+        return Colors.yellow; // Low
+      }
+    } else if (indicator == 'Weight') {
+      final double weight = double.tryParse(value) ?? 0.0;
+      if (weight <= 0) {
+        return Colors.red; // Very low
+      } else {
+        return Colors.green; // Normal
+      }
+    } else if (indicator == 'Temperature') {
+      final double temperature = double.tryParse(value) ?? 0.0;
+      if (temperature < 36.5 || temperature > 37.5) {
+        return Colors.red; // Very low or very high
+      } else {
+        return Colors.green; // Normal
+      }
+    } else if (indicator == 'Blood Pressure') {
+      final List<int> values =
+          value.split('/').map((val) => int.tryParse(val.trim()) ?? 0).toList();
+      final int systolic = values.length > 0 ? values[0] : 0;
+      final int diastolic = values.length > 1 ? values[1] : 0;
+
+      if (systolic < 90 || systolic > 120 || diastolic < 60 || diastolic > 80) {
+        return Colors.red; // Very low or very high
+      } else {
+        return Colors.green; // Normal
+      }
+    }
+
+    return Colors.red; // Default to red for unknown indicators
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 210 * size,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Image.asset(
-            icon,
-            // width: 80,
-            // height: 80,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+    final Color indicatorColor = _getIndicatorColor(title, data);
+    final Color svgColor = data.isNotEmpty ? indicatorColor : Colors.black;
+
+    return heart
+        ? Container(
+            width: MediaQuery.of(context).size.width / 2.3,
+            height: 170,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
             ),
-          ),
-          Text(data),
-          ElevatedButton(
-            onPressed: onAddData,
-            child: Text('Add Data'),
-          ),
-        ],
-      ),
-    );
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SvgPicture.asset(
+                  icon,
+                  color: svgColor,
+                ),
+                data.isEmpty
+                    ? ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xffECECED),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 0,
+                        ),
+                        onPressed: onAddData,
+                        child: Text(
+                          'Add Data',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      )
+                    : Container(
+                        child: Column(
+                          children: [
+                            Text(
+                              data,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              'BPM',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xff000000).withOpacity(0.5),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                SvgPicture.asset(
+                  'assets/svg/heart_rate_graph.svg',
+                  colorFilter: data.isEmpty
+                      ? ColorFilter.mode(Color(0xff82828A), BlendMode.srcIn)
+                      : ColorFilter.mode(svgColor, BlendMode.srcIn),
+                  width: MediaQuery.of(context).size.width / 2.3,
+                ),
+              ],
+            ),
+          )
+        : Container(
+            width: MediaQuery.of(context).size.width / 2.3,
+            height: 80,
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SvgPicture.asset(
+                  icon,
+                  color: svgColor,
+                ),
+                data.isEmpty
+                    ? ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xffECECED),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 0,
+                        ),
+                        onPressed: onAddData,
+                        child: Text(
+                          'Add Data',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: onAddData,
+                        child: Container(
+                          child: Text(
+                            data,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+              ],
+            ),
+          );
   }
 }

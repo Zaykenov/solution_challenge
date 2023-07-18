@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/my_flutter_app_icons.dart';
-import 'package:solution_challenge/presentation_UI/screens/MainPage.dart';
-import 'package:solution_challenge/presentation_UI/screens/article_page.dart';
-import 'package:solution_challenge/presentation_UI/screens/drugsearch_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
-import 'package:solution_challenge/presentation_UI/screens/pillSchedule.dart';
 import 'package:solution_challenge/presentation_UI/screens/profile_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/statistics_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/take_pills_page.dart';
-import 'package:solution_challenge/presentation_UI/widgets/appBarWidget.dart';
 
 class NavigationPage extends StatefulWidget {
   NavigationPage({Key? key}) : super(key: key);
