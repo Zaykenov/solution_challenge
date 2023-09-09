@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/bottomBarWidget.dart';
 
 class StatisticsPage extends StatefulWidget {
   const StatisticsPage({Key? key}) : super(key: key);

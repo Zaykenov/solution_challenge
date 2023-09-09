@@ -6,7 +6,6 @@ import 'package:solution_challenge/models/doctors_data.dart';
 import 'package:solution_challenge/presentation_UI/screens/doctor_appointmentPage.dart';
 import 'package:solution_challenge/presentation_UI/screens/map_page.dart';
 import '../../models/article_data.dart';
-import '../widgets/bottomBarWidget.dart';
 import 'package:solution_challenge/presentation_UI/screens/article_page.dart';
 
 class InterestsPage extends StatefulWidget {
@@ -17,7 +16,7 @@ class InterestsPage extends StatefulWidget {
 }
 
 class _InterestsPageState extends State<InterestsPage> {
-  int _currentIndex = 0;
+  // int _currentIndex = 0;
   List<Article> articles = [];
   List<Doctors> doctors = [];
   bool _loading = true;
@@ -31,11 +30,11 @@ class _InterestsPageState extends State<InterestsPage> {
     });
   }
 
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+  // void _onTabTapped(int index) {
+  //   setState(() {
+  //     _currentIndex = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

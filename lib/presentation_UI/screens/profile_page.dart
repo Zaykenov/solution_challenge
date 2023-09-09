@@ -6,10 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:solution_challenge/presentation_UI/screens/login_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
-
-import '../widgets/bottomBarWidget.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);

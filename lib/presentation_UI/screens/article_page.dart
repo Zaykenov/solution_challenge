@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../models/article_data.dart';
-import '../widgets/bottomBarWidget.dart';
 
 class ArticlePage extends StatefulWidget {
   final Article article;
@@ -12,15 +11,6 @@ class ArticlePage extends StatefulWidget {
 }
 
 class _ArticlePageState extends State<ArticlePage> {
-  int _currentIndex = 0;
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-      print(widget.article.image);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
