@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/presentation_UI/screens/profile_page.dart';
-import '../../my_flutter_app_icons.dart';
 import '../screens/interests_page.dart';
 import '../screens/pillSchedule.dart';
 import '../screens/statistics_page.dart';
@@ -55,11 +54,11 @@ class _RoundedBottomNavigationBarState
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(MyFlutterApp.chart_bar),
+              icon: Icon(Icons.bar_chart),
               label: 'Search',
             ),
             BottomNavigationBarItem(
-              icon: Icon(MyFlutterApp.heart),
+              icon: Icon(Icons.heart_broken),
               label: 'Notifications',
             ),
             BottomNavigationBarItem(

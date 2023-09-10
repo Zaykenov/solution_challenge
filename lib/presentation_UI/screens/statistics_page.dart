@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:solution_challenge/presentation_UI/widgets/selector_appbar.dart';
 
 class StatisticsPage extends StatefulWidget {
   const StatisticsPage({Key? key}) : super(key: key);
@@ -22,13 +22,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF6F6F6),
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Statistics',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Color(0xFFF6F6F6),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: SelectorAppBar(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),

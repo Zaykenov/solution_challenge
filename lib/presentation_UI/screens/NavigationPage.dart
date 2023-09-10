@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/my_flutter_app_icons.dart';
 import 'package:solution_challenge/presentation_UI/screens/interests_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/profile_page.dart';
 import 'package:solution_challenge/presentation_UI/screens/statistics_page.dart';
@@ -43,11 +42,11 @@ class _NavigationPageState extends State<NavigationPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(MyFlutterApp.chart_bar),
+              icon: Icon(Icons.bar_chart),
             label: 'Health & Wellness',
           ),
           BottomNavigationBarItem(
-            icon: Icon(MyFlutterApp.heart),
+              icon: Icon(Icons.heart_broken),
             label: 'Feed',
           ),
           BottomNavigationBarItem(
