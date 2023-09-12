@@ -12,15 +12,17 @@ class _SelectorAppBarState extends State<SelectorAppBar> {
   final int daysInMonth =
       DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day;
   final ScrollController _scrollController = ScrollController();
+  int selectedDateIndex = -1;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final int currentIndex = currentDate.day - 1;
-      final double initialScrollOffset = currentIndex *
-          (MediaQuery.of(context).size.width / 8); 
+      final double initialScrollOffset =
+          currentIndex * (MediaQuery.of(context).size.width / 7.9);
       _scrollController.jumpTo(initialScrollOffset);
+      selectedDateIndex = currentIndex;
     });
   }
 
@@ -40,22 +42,39 @@ class _SelectorAppBarState extends State<SelectorAppBar> {
             int dayOfMonth = index + 1;
             int relativeDay = dayOfMonth - currentDate.day;
 
-            return Container(
-              width: relativeDay == 0 ? 100 : 50,
-              margin: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color:
-                    relativeDay == 0 ? Color(0xff040415) : Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  relativeDay == 0
-                      ? "Today"
-                      : '${currentDate.day + relativeDay}',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: relativeDay == 0 ? Colors.white : Colors.black,
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  if (selectedDateIndex == index) {
+                    // Deselect the date
+                    selectedDateIndex = -1;
+                  } else {
+                    // Select a different date
+                    selectedDateIndex = index;
+                  }
+                });
+              },
+              child: Container(
+                width: relativeDay == 0 ? 100 : 50,
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: selectedDateIndex == index
+                      ? Color(0xff040415) // Change color for selected date
+                      : relativeDay == 0
+                          ? Color(0xffF5F5F6)
+                          : Colors.transparent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    relativeDay == 0
+                        ? "Today"
+                        : '${currentDate.day + relativeDay}',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: selectedDateIndex == index
+                            ? Colors.white
+                            : Color(0xff7D7D85)),
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/presentation_UI/widgets/selector_appbar.dart';
 
 class TakePillsPage extends StatefulWidget {
   const TakePillsPage({Key? key}) : super(key: key);
@@ -18,12 +19,9 @@ class _TakePillsPageState extends State<TakePillsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 50,
-        title: Container(
-          height: 85,
-          child: buildDateSelector(),
-        ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: SelectorAppBar(),
       ),
       body: buildPillList(),
     );
@@ -48,7 +46,6 @@ class _TakePillsPageState extends State<TakePillsPage> {
             setState(() {
               _selectedDate = date;
             });
-            _fetchReservedTimeSlots();
           },
           child: Container(
             width: 56,
@@ -114,10 +111,6 @@ class _TakePillsPageState extends State<TakePillsPage> {
         );
       },
     );
-  }
-
-  void _fetchReservedTimeSlots() {
-    // TODO: Fetch the reserved time slots for the selected date
   }
 }
 
