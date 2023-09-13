@@ -19,8 +19,8 @@ class _SelectorAppBarState extends State<SelectorAppBar> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final int currentIndex = currentDate.day - 1;
-      final double initialScrollOffset =
-          currentIndex * (MediaQuery.of(context).size.width / 7.9);
+      final double initialScrollOffset = currentIndex * 50;
+          // currentIndex * (MediaQuery.of(context).size.width / 7.9);
       _scrollController.jumpTo(initialScrollOffset);
       selectedDateIndex = currentIndex;
     });

@@ -121,11 +121,42 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 "Physical/Emotional State",
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
               ),
+              SizedBox(height: 15),
+              Container(
+                // padding: EdgeInsets.all(20),
+                // width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/svg/mental_state.svg',
+                          // height: 60,
+                          // width: 60,
+                          colorFilter: ColorFilter.mode(
+                            Colors.green,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        SvgPicture.asset('assets/svg/physical_state.svg'),
+                      ],
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
-      // bottomNavigationBar: RoundedBottomNavigationBar(),
     );
   }
 
@@ -248,7 +279,7 @@ class MedicalIndicatorContainer extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   icon,
-                  color: svgColor,
+                  colorFilter: ColorFilter.mode(svgColor, BlendMode.srcIn),
                 ),
                 data.isEmpty
                     ? ElevatedButton(
@@ -309,7 +340,7 @@ class MedicalIndicatorContainer extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   icon,
-                  color: svgColor,
+                  colorFilter: ColorFilter.mode(svgColor, BlendMode.srcIn),
                 ),
                 data.isEmpty
                     ? ElevatedButton(
