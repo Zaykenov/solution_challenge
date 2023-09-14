@@ -17,6 +17,8 @@ class _StatisticsPageState extends State<StatisticsPage> {
     'Temperature': '',
     'Blood Pressure': ''
   };
+  double _currentMentalState = 50;
+  double _currentPhysicalState = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
         preferredSize: const Size.fromHeight(100),
         child: SelectorAppBar(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -123,35 +125,178 @@ class _StatisticsPageState extends State<StatisticsPage> {
               ),
               SizedBox(height: 15),
               Container(
-                // padding: EdgeInsets.all(20),
-                // width: double.infinity,
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                // height: MediaQuery.of(context).size.height / 5,
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg/mental_state.svg',
-                          // height: 60,
-                          // width: 60,
-                          colorFilter: ColorFilter.mode(
-                            Colors.green,
-                            BlendMode.srcIn,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.sports_gymnastics,
+                            color: Color(0xff327CED),
+                            size: 30,
                           ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SvgPicture.asset('assets/svg/physical_state.svg'),
-                      ],
-                    )
-                  ],
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              activeTrackColor:
+                                  Color(0xff327CED).withOpacity(0.35),
+                              inactiveTrackColor: Colors.transparent,
+                              trackShape: RoundedRectSliderTrackShape(),
+                              trackHeight: 25.0,
+                              thumbColor: Color(0xff327CED),
+                              thumbShape: RoundSliderThumbShape(
+                                  enabledThumbRadius: 12.0),
+                              overlayColor: Colors.red.withAlpha(32),
+                              overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                            ),
+                            child: Slider(
+                              value: _currentPhysicalState,
+                              max: 100,
+                              divisions: 5,
+                              label: _currentPhysicalState.round().toString(),
+                              onChanged: (double value) {
+                                setState(() {
+                                  _currentPhysicalState = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.heart_broken,
+                            color: Color(0xffF15223),
+                            size: 30,
+                          ),
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              activeTrackColor:
+                                  Color(0xffF15223).withOpacity(0.35),
+                              inactiveTrackColor: Colors.transparent,
+                              trackShape: RoundedRectSliderTrackShape(),
+                              trackHeight: 25.0,
+                              thumbColor: Color(0xffF15223),
+                              thumbShape: RoundSliderThumbShape(
+                                  enabledThumbRadius: 12.0),
+                              overlayColor: Colors.red.withAlpha(32),
+                              overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                            ),
+                            child: Slider(
+                              value: _currentMentalState,
+                              max: 100,
+                              divisions: 5,
+                              label: _currentMentalState.round().toString(),
+                              onChanged: (double value) {
+                                setState(() {
+                                  _currentMentalState = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      // SvgPicture.asset(
+                      //   'assets/svg/mental_state.svg',
+                      //   // height: 60,
+                      //   // width: 60,
+                      //   colorFilter: ColorFilter.mode(
+                      //     Colors.green,
+                      //     BlendMode.srcIn,
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "Tests",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+              ),
+              SizedBox(height: 15),
+              Column(
+                children: [
+                  ListTile(
+                    splashColor: Colors.grey,
+                    onTap: () {},
+                    tileColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      // side: BorderSide(color: Colors.black),
+                    ),
+                    leading: CircleAvatar(
+                      backgroundColor: Color(0xff7D7D85).withOpacity(0.5),
+                      child: Container(
+                        child: Text('25.05', style: TextStyle(color: Colors.black, fontSize: 16),),
+                      ),
+                    ),
+                    title: Text('Blood Test'),
+                    subtitle: Text('25.05.2022'),
+                  ),
+                  SizedBox(height: 10),
+                  ListTile(
+                    splashColor: Colors.grey,
+                    onTap: () {},
+                    tileColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      // side: BorderSide(color: Colors.black),
+                    ),
+                    leading: CircleAvatar(
+                      backgroundColor: Color(0xff7D7D85),
+                      child: Container(
+                        child: Text('data'),
+                      ),
+                    ),
+                    title: Text('Blood Test'),
+                    subtitle: Text('25.05.2022'),
+                  ),
+                  SizedBox(height: 10),
+                  ListTile(
+                    splashColor: Colors.grey,
+                    onTap: () {},
+                    tileColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      // side: BorderSide(color: Colors.black),
+                    ),
+                    leading: CircleAvatar(
+                      backgroundColor: Color(0xff7D7D85),
+                      child: Container(
+                        child: Icon(
+                          Icons.add,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      'Blood Test',
+                      style: TextStyle(color: Color(0xff7D7D85)),
+                    ),
+                    subtitle: Text(
+                      '25.05.2022',
+                      style: TextStyle(
+                        color: Color(0xff7D7D85),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
