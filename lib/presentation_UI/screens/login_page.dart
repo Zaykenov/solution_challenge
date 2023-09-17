@@ -116,7 +116,13 @@ class _LoginPageState extends State<LoginPage> {
                             );
                           }
                         } catch (e) {
-                          print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                e.toString(),
+                              ),
+                            ),
+                          );
                         } finally {
                           setState(() {
                             _isLoadingSignIn = false;
