@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:solution_challenge/presentation_UI/widgets/selector_appbar.dart';
+import 'package:solution_challenge/presentation_UI/widgets/test_pill_widget.dart';
 
 class StatisticsPage extends StatefulWidget {
   const StatisticsPage({Key? key}) : super(key: key);
@@ -241,61 +242,23 @@ class _StatisticsPageState extends State<StatisticsPage> {
                       // side: BorderSide(color: Colors.black),
                     ),
                     leading: CircleAvatar(
-                      backgroundColor: Color(0xff7D7D85).withOpacity(0.5),
+                      // minRadius: 300,
+                      // minRadius: 50,
+                      backgroundColor: Color(0xff7D7D85).withOpacity(0.1),
                       child: Container(
-                        child: Text('25.05', style: TextStyle(color: Colors.black, fontSize: 16),),
-                      ),
-                    ),
-                    title: Text('Blood Test'),
-                    subtitle: Text('25.05.2022'),
-                  ),
-                  SizedBox(height: 10),
-                  ListTile(
-                    splashColor: Colors.grey,
-                    onTap: () {},
-                    tileColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      // side: BorderSide(color: Colors.black),
-                    ),
-                    leading: CircleAvatar(
-                      backgroundColor: Color(0xff7D7D85),
-                      child: Container(
-                        child: Text('data'),
-                      ),
-                    ),
-                    title: Text('Blood Test'),
-                    subtitle: Text('25.05.2022'),
-                  ),
-                  SizedBox(height: 10),
-                  ListTile(
-                    splashColor: Colors.grey,
-                    onTap: () {},
-                    tileColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      // side: BorderSide(color: Colors.black),
-                    ),
-                    leading: CircleAvatar(
-                      backgroundColor: Color(0xff7D7D85),
-                      child: Container(
-                        child: Icon(
-                          Icons.add,
-                          size: 20,
+                        child: Text(
+                          '25.05',
+                          style: TextStyle(color: Colors.black, fontSize: 16),
                         ),
                       ),
                     ),
-                    title: Text(
-                      'Blood Test',
-                      style: TextStyle(color: Color(0xff7D7D85)),
-                    ),
-                    subtitle: Text(
-                      '25.05.2022',
-                      style: TextStyle(
-                        color: Color(0xff7D7D85),
-                      ),
-                    ),
+                    title: Text('Blood Test'),
+                    subtitle: Text('25.05.2022'),
                   ),
+                  SizedBox(height: 10),
+                  TestPillWidget(title: '25.05', activity: 'HIV Test', date: '35.30.30'),
+                  SizedBox(height: 10),
+              BlankTest()
                 ],
               ),
             ],

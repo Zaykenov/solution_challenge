@@ -19,8 +19,9 @@ class _SelectorAppBarState extends State<SelectorAppBar> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final int currentIndex = currentDate.day - 1;
-      final double initialScrollOffset = currentIndex * 52.3;
-          // currentIndex * (MediaQuery.of(context).size.width / 7.9);
+      final double initialScrollOffset =
+          currentIndex * (MediaQuery.of(context).size.width / 8.19);
+      ;
       _scrollController.jumpTo(initialScrollOffset);
       selectedDateIndex = currentIndex;
     });
@@ -55,7 +56,9 @@ class _SelectorAppBarState extends State<SelectorAppBar> {
                 });
               },
               child: Container(
-                width: relativeDay == 0 ? 100 : 50,
+                width: relativeDay == 0
+                    ? MediaQuery.of(context).size.width / 3.5
+                    : MediaQuery.of(context).size.width / 9,
                 margin: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: selectedDateIndex == index

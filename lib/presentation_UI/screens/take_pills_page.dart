@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge/presentation_UI/widgets/selector_appbar.dart';
+import 'package:solution_challenge/presentation_UI/widgets/test_pill_widget.dart';
 
 class TakePillsPage extends StatefulWidget {
   const TakePillsPage({Key? key}) : super(key: key);
@@ -98,17 +99,9 @@ class _TakePillsPageState extends State<TakePillsPage> {
       itemCount: _pillList.length,
       itemBuilder: (context, index) {
         final pill = _pillList[index];
-        final isHighlighted = pill.isTaken;
+        // final isHighlighted = pill.isTaken; ???
 
-        return ListTile(
-          title: Text(
-            pill.name,
-            style: TextStyle(
-              fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-          tileColor: isHighlighted ? Colors.yellow : null,
-        );
+        return TestPillWidget(title: 'med', activity: pill.name, date: '30mg');
       },
     );
   }
