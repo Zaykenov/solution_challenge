@@ -190,27 +190,20 @@ class MedicalIndicatorContainer extends StatelessWidget {
     if (indicator == 'Heart Rate') {
       final int heartRate = int.tryParse(value) ?? 0;
       if (heartRate < 60) {
-        return Colors.red; // Very low
-      } else if (heartRate >= 60 && heartRate <= 100) {
-        return Colors.green; // Normal
+        return Color(0xffFE4B33); // Very low
+      } else if (heartRate >= 70 && heartRate <= 100) {
+        return Color(0xff5CFE33); // Normal
       } else {
-        return Colors.yellow; // Low
+        return Color(0xffFEC533); // Low
       }
     } else if (indicator == 'Oxygen Saturation') {
       final int oxygenSaturation = int.tryParse(value) ?? 0;
       if (oxygenSaturation < 95) {
-        return Colors.red; // Very low
+        return Color(0xffED3232); // Very low
       } else if (oxygenSaturation >= 95 && oxygenSaturation <= 100) {
         return Colors.green; // Normal
       } else {
-        return Colors.yellow; // Low
-      }
-    } else if (indicator == 'Weight') {
-      final double weight = double.tryParse(value) ?? 0.0;
-      if (weight <= 0) {
-        return Colors.red; // Very low
-      } else {
-        return Colors.green; // Normal
+        return Color(0xffEDC432).withOpacity(0.35); // Low
       }
     } else if (indicator == 'Temperature') {
       final double temperature = double.tryParse(value) ?? 0.0;
@@ -225,10 +218,15 @@ class MedicalIndicatorContainer extends StatelessWidget {
       final int systolic = values.length > 0 ? values[0] : 0;
       final int diastolic = values.length > 1 ? values[1] : 0;
 
-      if (systolic < 90 || systolic > 120 || diastolic < 60 || diastolic > 80) {
-        return Colors.red; // Very low or very high
+      if (systolic < 90 || diastolic < 60) {
+        return Color(0xff8A0008).withOpacity(0.3); // Very low
+      } else if (systolic >= 90 &&
+          systolic <= 120 &&
+          diastolic >= 60 &&
+          diastolic <= 80) {
+        return Color(0xff008A5E); // Normal
       } else {
-        return Colors.green; // Normal
+        return Color(0xffEDB932); // Low
       }
     }
 
@@ -238,7 +236,7 @@ class MedicalIndicatorContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color indicatorColor = _getIndicatorColor(title, data);
-    final Color svgColor = data.isNotEmpty ? indicatorColor : Colors.black;
+    final Color svgColor = data.isNotEmpty ? indicatorColor : null;
 
     return heart
         ? Container(
@@ -253,7 +251,7 @@ class MedicalIndicatorContainer extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   icon,
-                  color: svgColor,
+                  colorFilter: ColorFilter.mode(svgColor, BlendMode.srcIn),
                 ),
                 data.isEmpty
                     ? ElevatedButton(
@@ -314,7 +312,7 @@ class MedicalIndicatorContainer extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   icon,
-                  color: svgColor,
+                  colorFilter: ColorFilter.mode(svgColor, BlendMode.srcIn),
                 ),
                 data.isEmpty
                     ? ElevatedButton(
